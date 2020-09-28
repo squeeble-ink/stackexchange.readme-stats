@@ -124,8 +124,6 @@ const getBadges = ({ bronze, silver, gold }) => {
     badges -= 1
   }
 
-  console.log(badges)
-
   const bronzeCard = getBadge('bronze', badges, bronze)
   const silverCard = getBadge('silver', badges, silver, neighbor)
   const goldCard = getBadge('gold', badges, gold)
@@ -151,10 +149,14 @@ router.get('/', async (req, res) => {
 
   let siteName = seSite
   let headerLeft = 0
-  switch (seSite) {
+  switch (seSite.toLowerCase()) {
     case 'stackoverflow':
       siteName = 'Stack Overflow' // 125 width
-      headerLeft = 17
+      headerLeft = (158 - 125) * 0.5
+      break
+    case 'meta':
+      siteName = 'Meta Exchange' // 133 width
+      headerLeft = (158 - 133) * 0.5
       break
   }
 
