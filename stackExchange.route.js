@@ -138,6 +138,9 @@ const getBadges = ({ bronze, silver, gold }) => {
 router.get('/', async (req, res) => {
   const userId = req.query.userId
   const seSite = req.query.seSite
+  const userImg = req.query.img ? false : true
+  const nameX = req.query.nameX || 0
+  const nameSize = req.query.nameSize || 25
 
   if (!userId) {
     return res.send('userId is required!')
@@ -158,6 +161,9 @@ router.get('/', async (req, res) => {
       siteName = 'Meta Exchange' // 133 width
       headerLeft = (158 - 133) * 0.5
       break
+    case 'askubuntu':
+      siteName = 'Ask Ubuntu' // 97 width
+      headerLeft = (158 - 97) * 0.5
   }
 
   const getData = async (url) => {
@@ -185,6 +191,7 @@ router.get('/', async (req, res) => {
   const item = items[0]
 
   let reputation = item.reputation
+  let displayName = item.display_name
 
   let repInfo = await getRep(reputation)
 
@@ -220,7 +227,7 @@ router.get('/', async (req, res) => {
   res.header('X-Content-Type-Options', 'nosniff')
   res.header('Cache-Control', 'public, max-age=86400')
   res.send(`
-    <svg width="210" height="302" viewBox="0 0 210 302" fill="none"
+    <svg width="210" height="${userImg ? 302 : 200}" viewBox="0 0 210 ${userImg ? 302 : 200}" fill="none"
       xmlns="http://www.w3.org/2000/svg"
       xmlns:xlink="http://www.w3.org/1999/xlink"
       xmlns:html="http://www.w3.org/1999/xhtml"
@@ -234,6 +241,12 @@ router.get('/', async (req, res) => {
 
         .profile {
           border-radius: 25px;
+        }
+
+        .name {
+          font: 600 ${nameSize}px 'Segoe UI', Ubuntu, Sans-Serif;
+          fill: #f2f2f3;
+          animation: fadeInAnimation 0.8s ease-in-out forwards;
         }
 
         .score {
@@ -265,7 +278,7 @@ router.get('/', async (req, res) => {
       <g data-testid="header-card" transform="translate(25, 25)">
         <text x="${headerLeft}" y="0" class="header" data-testid="header">${siteName}</text>
       </g>
-      <g data-testid="profile-card" transform="translate(25, 40)">
+      ${userImg ? `<g data-testid="profile-card" transform="translate(25, 40)">
         <image
           data-testid="profile"
           class="profile"
@@ -273,12 +286,12 @@ router.get('/', async (req, res) => {
           widht="158"
           height="158"
         />
-      </g>
-      <g data-testid="score-card" transform="translate(25, 235)">
+      </g>` : `<text x="${nameX}" y="65" class="name">${displayName}</text>`}
+      <g data-testid="score-card" transform="translate(25, ${userImg ? 235 : 125})">
       <text x="${scoreLeft}" y="0" class="score" data-testid="header">${reputation}</text>
       <text x="${repLeft}" y="-6" class="reputation" data-testid="header">REPUTATION</text>
       </g>
-      <g data-testid="badges-card" transform="translate(25, 240)">
+      <g data-testid="badges-card" transform="translate(25, ${userImg ? 240 : 130})">
         ${goldCard}
         ${silverCard}
         ${bronzeCard}
