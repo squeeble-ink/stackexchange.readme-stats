@@ -1,0 +1,19 @@
+{
+  "name": "stackexchange.readme-stats",
+  "version": "1.0.0",
+  "description": "Stack Exchange Readme Stats",
+  "main": "stackExchange.route.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/squeeble-ink/stackexchange.readme-stats.git"
+  },
+  "author": "TessavWalstijn",
+  "license": "GPL-3.0 License",
+  "bugs": {
+    "url": "https://github.com/squeeble-ink/stackexchange.readme-stats/issues"
+  },
+  "homepage": "https://github.com/squeeble-ink/stackexchange.readme-stats#readme"
+}
