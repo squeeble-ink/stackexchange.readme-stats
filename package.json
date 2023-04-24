@@ -2,9 +2,11 @@
   "name": "stackexchange.readme-stats",
   "version": "1.0.0",
   "description": "Stack Exchange Readme Stats",
-  "main": "stackExchange.route.js",
+  "main": "index.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon ./index.js",
+    "start": "cross-env NODE_ENV=production node ./index.js"
   },
   "repository": {
     "type": "git",
@@ -15,5 +17,16 @@
   "bugs": {
     "url": "https://github.com/squeeble-ink/stackexchange.readme-stats/issues"
   },
-  "homepage": "https://github.com/squeeble-ink/stackexchange.readme-stats#readme"
+  "homepage": "https://github.com/squeeble-ink/stackexchange.readme-stats#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "cross-env": "^7.0.3",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "node-fetch": "^3.3.1",
+    "request": "^2.88.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  }
 }
