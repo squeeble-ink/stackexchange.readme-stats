@@ -1,7 +1,10 @@
-const express = require('express')
-const request = require('request').defaults({ encoding: null })
-const fetch = require('node-fetch')
-const config = require('config')
+import express from 'express'
+import r from 'request'
+import fetch from 'node-fetch'
+import * as dotenv from 'dotenv'
+dotenv.config()
+
+const request = r.defaults({ encoding: null })
 
 const router = express.Router()
 
@@ -150,6 +153,10 @@ router.get('/', async (req, res) => {
     return res.send('seSite is required!')
   }
 
+  if (!process.env.STACK_EXCHANGE_API_KEY) {
+    return res.send('Issue with private keys! Contact the developer.')
+  }
+
   let siteName = seSite
   let headerLeft = 0
   switch (seSite.toLowerCase()) {
@@ -182,13 +189,22 @@ router.get('/', async (req, res) => {
     return await promise
   }
 
-  const { items } = await getData(
-    `https://api.stackexchange.com/2.2/users/${userId}?order=desc&sort=reputation&site=${seSite}&key=${config.get(
-      'stackexchangeKey',
-    )}`,
+  const data = await getData(
+    `https://api.stackexchange.com/2.2/users/${userId}?order=desc&sort=reputation&site=${seSite}&key=${process.env.STACK_EXCHANGE_API_KEY}`,
   )
+  const { items } = data
+
+  if (!data || !items) {
+    return res.send(
+      'Stack Exchange API down OR hitting rate limit. Try again later.',
+    )
+  }
 
   const item = items[0]
+
+  if (!item) {
+    return res.send('User not found!')
+  }
 
   let reputation = item.reputation
   let displayName = item.display_name
@@ -202,7 +218,7 @@ router.get('/', async (req, res) => {
 
   let profile = item.profile_image
 
-  const getProfile = async (url) => {
+  const getProfileImageData = async (url) => {
     let promise = new Promise((res, rej) => {
       request.get(url, function (error, result, body) {
         if (error) {
@@ -215,8 +231,8 @@ router.get('/', async (req, res) => {
     return await promise
   }
 
-  const data = await getProfile(profile)
-  const image = data.toString('base64')
+  const imageData = await getProfileImageData(profile)
+  const image = imageData.toString('base64')
 
   const { bronzeCard, silverCard, goldCard } = getBadges(
     item.badge_counts,
@@ -227,7 +243,9 @@ router.get('/', async (req, res) => {
   res.header('X-Content-Type-Options', 'nosniff')
   res.header('Cache-Control', 'public, max-age=86400')
   res.send(`
-    <svg width="210" height="${userImg ? 302 : 200}" viewBox="0 0 210 ${userImg ? 302 : 200}" fill="none"
+    <svg width="210" height="${
+      userImg ? 302 : 200
+    }" viewBox="0 0 210 ${userImg ? 302 : 200}" fill="none"
       xmlns="http://www.w3.org/2000/svg"
       xmlns:xlink="http://www.w3.org/1999/xlink"
       xmlns:html="http://www.w3.org/1999/xhtml"
@@ -278,7 +296,9 @@ router.get('/', async (req, res) => {
       <g data-testid="header-card" transform="translate(25, 25)">
         <text x="${headerLeft}" y="0" class="header" data-testid="header">${siteName}</text>
       </g>
-      ${userImg ? `<g data-testid="profile-card" transform="translate(25, 40)">
+      ${
+        userImg
+          ? `<g data-testid="profile-card" transform="translate(25, 40)">
         <image
           data-testid="profile"
           class="profile"
@@ -286,12 +306,18 @@ router.get('/', async (req, res) => {
           widht="158"
           height="158"
         />
-      </g>` : `<text x="${nameX}" y="65" class="name">${displayName}</text>`}
-      <g data-testid="score-card" transform="translate(25, ${userImg ? 235 : 125})">
+      </g>`
+          : `<text x="${nameX}" y="65" class="name">${displayName}</text>`
+      }
+      <g data-testid="score-card" transform="translate(25, ${
+        userImg ? 235 : 125
+      })">
       <text x="${scoreLeft}" y="0" class="score" data-testid="header">${reputation}</text>
       <text x="${repLeft}" y="-6" class="reputation" data-testid="header">REPUTATION</text>
       </g>
-      <g data-testid="badges-card" transform="translate(25, ${userImg ? 240 : 130})">
+      <g data-testid="badges-card" transform="translate(25, ${
+        userImg ? 240 : 130
+      })">
         ${goldCard}
         ${silverCard}
         ${bronzeCard}
@@ -300,4 +326,4 @@ router.get('/', async (req, res) => {
   `)
 })
 
-module.exports = router
+export default router
