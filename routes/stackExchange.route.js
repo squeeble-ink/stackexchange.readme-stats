@@ -142,7 +142,7 @@ router.get('/', async (req, res) => {
   const userId = req.query.userId
   const seSite = req.query.seSite
   const userImg = req.query.img ? false : true
-  const nameX = req.query.nameX || 0
+  const nameX = req.query.nameX || null
   const nameSize = req.query.nameSize || 25
 
   if (!userId) {
@@ -161,16 +161,13 @@ router.get('/', async (req, res) => {
   let headerLeft = 0
   switch (seSite.toLowerCase()) {
     case 'stackoverflow':
-      siteName = 'Stack Overflow' // 125 width
-      headerLeft = (158 - 125) * 0.5
+      siteName = 'Stack Overflow'
       break
     case 'meta':
-      siteName = 'Meta Exchange' // 133 width
-      headerLeft = (158 - 133) * 0.5
+      siteName = 'Meta Exchange'
       break
     case 'askubuntu':
-      siteName = 'Ask Ubuntu' // 97 width
-      headerLeft = (158 - 97) * 0.5
+      siteName = 'Ask Ubuntu'
   }
 
   const getData = async (url) => {
@@ -293,12 +290,13 @@ router.get('/', async (req, res) => {
       </defs>
       <rect data-testid="card-bg" x="0.5" y="0.5" rx="4.5" ry="4.5" width="99%" height="99%" stroke="#4a4e51" fill="#4a4e51" stroke-opacity="1"/>
       <rect data-testid="card-bg" x="0.5" y="45%" rx="4.5" ry="4.5" width="99%" height="55%" stroke="#4a4e51" fill="#2d2d2d" stroke-opacity="1"/>
-      <g data-testid="header-card" transform="translate(25, 25)">
-        <text x="${headerLeft}" y="0" class="header" data-testid="header">${siteName}</text>
+      <g data-testid="header-card" transform="translate(105, 25)">
+        <text x="0" y="0" class="header" text-anchor="middle" data-testid="header">${siteName}</text>
       </g>
       ${
         userImg
-          ? `<g data-testid="profile-card" transform="translate(25, 40)">
+          ? `
+      <g data-testid="profile-card" transform="translate(25, 40)">
         <image
           data-testid="profile"
           class="profile"
@@ -307,7 +305,20 @@ router.get('/', async (req, res) => {
           height="158"
         />
       </g>`
-          : `<text x="${nameX}" y="65" class="name">${displayName}</text>`
+          : `
+      <g
+        data-testid="profile-name"
+        transform="translate(${nameX === null ? 105 : 0}, 65)"
+      >
+        <text
+          x="${nameX === null ? 0 : nameX}"
+          y="0"
+          ${ nameX === null ? 'text-anchor="middle"' : ''}
+          class="name"
+        >
+          ${displayName}
+        </text>
+      </g>`
       }
       <g data-testid="score-card" transform="translate(25, ${
         userImg ? 235 : 125

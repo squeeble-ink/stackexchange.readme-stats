@@ -1,9 +1,8 @@
 version: '2'
 
 services:
-  dev:
+  se-readme-dev:
     container_name: stack-readme-dev
-    profiles: ['dev']
     build:
       context: .
       dockerfile: stack-readme-dev.dockerfile
@@ -11,9 +10,8 @@ services:
         - api_key=${STACK_EXCHANGE_API_KEY}
     ports:
       - '3040:3040'
-  prd:
+  se-readme-prd:
     container_name: stack-readme-prd
-    profiles: ['prd']
     build:
       context: .
       dockerfile: stack-readme-prd.dockerfile
