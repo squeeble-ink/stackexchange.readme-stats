@@ -1,5 +1,11 @@
 # SE Readme Changelog
 
+## [[v2.1.3] - 2024/02/19](https://github.com/squeeble-ink/stackexchange.readme-stats/releases/tag/v2.1.2)
+
+### Fixed
+
+- nginx proxy_pass 
+
 ## [[v2.1.2] - 2024/02/19](https://github.com/squeeble-ink/stackexchange.readme-stats/releases/tag/v2.1.2)
 
 ### Fixed
