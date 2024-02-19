@@ -1,0 +1,29 @@
+name: Deploy Node.js CI - DO-001
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: [ubuntu-22.04]
+    env:
+      NODE_ENV: production
+
+    steps:
+      - name: Deploy production
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.MAIN_IP }}
+          username: ${{ secrets.GHA_USER }}
+          key: ${{ secrets.GHA_SSH }}
+          passphrase: ${{ secrets.GHA_PW }}
+          script: |
+            eval `ssh-agent -s`
+            cd ./_server/${{ vars.REPO_NAME }}/prd/
+            rm -rf ./${{ vars.REPO_NAME }}
+            ssh-add ~/.ssh/${{ secrets.REPO_SSH_NAME }}
+            git clone git@github.com:squeeble-ink/${{ vars.REPO_NAME }}.git
+            cd ./${{ vars.REPO_NAME }}
+            rm ./nginx/dev.conf
+            docker compose up prd -d --build

@@ -2,6 +2,12 @@
 
 ## Next
 
+### Added
+
+- Explanation how to use
+- GitHub workflows for deployment
+- nginx configuration for deployment
+
 ### Fixed
 
 - Site name centering
