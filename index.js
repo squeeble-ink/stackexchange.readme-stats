@@ -3,7 +3,7 @@ import cors from 'cors'
 import stackExchange from './routes/stackExchange.route.js'
 
 const fallbackPort =
-  process.env.NODE_ENV === 'production' ? 3344 : 3040
+  process.env.NODE_ENV === 'production' ? 3070 : 3071
 const port = process.env.PORT
   ? parseInt(process.env.PORT, 10)
   : fallbackPort

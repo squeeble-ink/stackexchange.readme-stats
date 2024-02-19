@@ -1,6 +1,6 @@
 {
   "name": "stackexchange.readme-stats",
-  "version": "1.0.0",
+  "version": "2.1.0",
   "description": "Stack Exchange Readme Stats",
   "main": "index.js",
   "type": "module",
