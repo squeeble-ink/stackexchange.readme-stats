@@ -1,5 +1,11 @@
 # SE Readme Changelog
 
+## [[v2.1.1] - 2024/02/19](https://github.com/squeeble-ink/stackexchange.readme-stats/releases/tag/v2.1.1)
+
+### Fixed
+
+- nginx dev configuration
+
 ## [[v2.1.0] - 2024/02/19](https://github.com/squeeble-ink/stackexchange.readme-stats/releases/tag/v2.1.0)
 
 ### Added
