@@ -1,10 +1,10 @@
 # SE Readme Changelog
 
-## [[v2.1.3] - 2024/02/19](https://github.com/squeeble-ink/stackexchange.readme-stats/releases/tag/v2.1.2)
+## [[v2.1.3] - 2024/02/19](https://github.com/squeeble-ink/stackexchange.readme-stats/releases/tag/v2.1.3)
 
 ### Fixed
 
-- nginx proxy_pass 
+- nginx proxy_pass
 
 ## [[v2.1.2] - 2024/02/19](https://github.com/squeeble-ink/stackexchange.readme-stats/releases/tag/v2.1.2)
 
@@ -32,7 +32,7 @@
 - User name centering
   - nameX parameter still works as expected
 
-### Changed 
+### Changed
 
 - Docker service names to include project name
 
@@ -47,7 +47,6 @@
 
 - Issue when Stack Exchange API is down OR hitting rate limit
 - Issue when User was not found on Stack Exchange site
-
 
 ## [[v1.1.1] - 2022/07/10](https://github.com/squeeble-ink/stackexchange.readme-stats/releases/tag/v1.1.1)
 
