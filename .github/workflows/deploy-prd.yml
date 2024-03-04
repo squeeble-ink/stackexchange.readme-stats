@@ -26,4 +26,5 @@ jobs:
             git clone git@github.com:squeeble-ink/${{ vars.REPO_NAME }}.git
             cd ./${{ vars.REPO_NAME }}
             rm ./nginx/dev.conf
+            rm ./nginx/dev-location.conf
             docker compose up prd -d --build
