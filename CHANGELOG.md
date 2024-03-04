@@ -1,5 +1,11 @@
 # SE Readme Changelog
 
+## [[v2.1.4] - 2024/02/19](https://github.com/squeeble-ink/stackexchange.readme-stats/releases/tag/v2.1.4)
+
+### Fixed
+
+- nginx location conf now imported by backend repo
+
 ## [[v2.1.3] - 2024/02/19](https://github.com/squeeble-ink/stackexchange.readme-stats/releases/tag/v2.1.3)
 
 ### Fixed
