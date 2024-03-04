@@ -25,4 +25,5 @@ jobs:
             cd ./${{ vars.REPO_NAME }}
             git checkout develop
             rm ./nginx/prd.conf
+            rm ./nginx/prd-location.conf
             docker compose up dev -d --build
