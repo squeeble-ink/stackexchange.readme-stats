@@ -53,7 +53,7 @@ router.get('/', async (req, res) => {
     missingInfo = [
       'seSite is required!',
       'Example:',
-      '&seSite=stackoverflow',
+      '&amp;seSite=stackoverflow',
     ]
     return res.send(
       SVG(
