@@ -1,12 +1,14 @@
 {
   "name": "stackexchange.readme-stats",
-  "version": "2.1.4",
+  "version": "2.2.0",
   "description": "Stack Exchange Readme Stats",
-  "main": "index.js",
+  "main": "source/index.js",
   "type": "module",
+  "packageManager": "yarn@4.1.1",
   "scripts": {
     "dev": "nodemon ./index.js",
-    "start": "cross-env NODE_ENV=production node ./index.js"
+    "start": "node ./index.js",
+    "prod": "cross-env NODE_ENV=production node ./index.js"
   },
   "repository": {
     "type": "git",
