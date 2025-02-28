@@ -22,7 +22,7 @@ server.use(cors())
 
 const api = express()
 
-api.use('/se', stackExchange)
+api.use('/', stackExchange)
 
 server.use('/', api)
 
