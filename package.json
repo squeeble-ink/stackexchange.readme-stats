@@ -8,7 +8,8 @@
   "scripts": {
     "dev": "nodemon ./source/index.js",
     "start": "node ./source/index.js",
-    "prod": "cross-env NODE_ENV=production node ./source/index.js"
+    "prod": "cross-env NODE_ENV=production node ./source/index.js",
+    "map": "node ./scripts/createMaps.js"
   },
   "repository": {
     "type": "git",
