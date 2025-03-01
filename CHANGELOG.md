@@ -1,5 +1,11 @@
 # SE Readme Changelog
 
+## NEXT
+
+### Fixed
+
+- img parameter resulting always false if it has any value
+
 ## [v2.3.0 - 2025-03-01](https://github.com/squeeble-ink/stackexchange.readme-stats/releases/tag/v2.3.0)
 
 ### Added
