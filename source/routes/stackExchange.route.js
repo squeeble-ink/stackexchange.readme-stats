@@ -23,6 +23,7 @@ router.get('/', async (req, res) => {
   const userId = req.query.userId
   const seSite = req.query.seSite
   const useImage = req.query.img ? Boolean(req.query.img) : true
+  const layout = req.query.layout ?? 'full'
   const nameX = req.query.nameX || null
   const nameSize = req.query.nameSize || 25
   let missingInfo = null
@@ -68,6 +69,34 @@ router.get('/', async (req, res) => {
         `,
       ),
     )
+  }
+
+  if (layout) {
+    missingInfo = [
+      'layout is incorrect!',
+      'Allowed values:',
+      'full, small, mini',
+    ]
+
+    switch(layout) {
+      case 'full':
+      case 'small':
+      case 'mini':
+        break;
+      default:
+
+    return res.send(
+      SVG(
+        true,
+        true,
+        'Error!',
+        `
+        ${userError()}
+        ${errorText(missingInfo)}
+        `,
+      ),
+    )
+    }
   }
 
   if (!process.env.STACK_EXCHANGE_API_KEY) {
