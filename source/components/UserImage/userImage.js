@@ -1,27 +1,11 @@
-import r from 'request'
-
-const request = r.defaults({ encoding: null })
-
-const getProfileImageData = async (url) => {
-  let promise = new Promise((res, rej) => {
-    request.get(url, function (error, result, body) {
-      if (error) {
-        return rej(error)
-      }
-      res(body)
-    })
-  })
-
-  return await promise
-}
+import { getBase64Image } from '../../utils/getBase64Image.js'
 
 /**
- * @param {string} base64Image base64 image string
+ * @param {string} profileImageUrl
  * @returns svg string
  */
-export const userImage = async (profileImage) => {
-  const imageData = await getProfileImageData(profileImage)
-  const base64Image = imageData.toString('base64')
+export const userImage = async (profileImageUrl) => {
+  const base64Image = await getBase64Image(profileImageUrl)
 
   return `
     <g data-test-id="profile-card" transform="translate(25, 40)">
@@ -33,7 +17,7 @@ export const userImage = async (profileImage) => {
       <image
         data-test-id="profile"
         class="profile-image"
-        xlink:href="data:image/jpg;base64,${base64Image}"
+        xlink:href="${base64Image}"
         widht="158"
         height="158"
       />
