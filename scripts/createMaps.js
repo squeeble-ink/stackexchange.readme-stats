@@ -14,12 +14,12 @@ fetch(
     console.log(body.items.length)
     const items = body.items
 
-    items.forEach(async ({ api_site_parameter, name, icon_url }) => {
+    items.forEach(async ({ api_site_parameter, name, logo_url }) => {
       names[api_site_parameter] = name
-      icons[api_site_parameter] = icon_url
+      icons[api_site_parameter] = logo_url
     })
   })
   .then(async () => {
-    console.log(names)
+    // console.log(names)
     console.log(icons)
   })

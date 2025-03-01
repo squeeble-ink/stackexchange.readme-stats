@@ -4,6 +4,8 @@
 
 ### Added
 
+- Implemented the stack exchange site logo instead of a title
+  Title will be used as fallback
 - Implemented nice name for all stack exchange sites
 
 ### Fixed

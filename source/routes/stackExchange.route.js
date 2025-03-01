@@ -13,6 +13,7 @@ import {
 import { SVG } from '../components/SVG/index.js'
 import { errorText } from '../components/ErrorText/index.js'
 import { siteName } from '../components/SiteName/index.js'
+import { siteLogo } from '../components/SiteLogo/index.js'
 
 dotenv.config()
 
@@ -148,16 +149,19 @@ router.get('/', async (req, res) => {
     )
   }
 
+  const siteLogoContent = await siteLogo(seSite)
+
   res.send(
     SVG(
       useImage,
       false,
-      siteName(seSite),
+      siteLogoContent ?? siteName(seSite),
       `${
         useImage
           ? await userImage(user.profile_image)
           : userName(user.display_name, nameSize, nameX)
       }
+      ${siteLogoContent}
       ${reputationContainer(useImage, user.reputation)}
       ${badgeContainer(useImage, user.badge_counts)}`,
     ),
