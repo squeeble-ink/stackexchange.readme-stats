@@ -12,6 +12,10 @@
 
 - Profile image rendering
 
+### Removed
+
+- Removed GitHub workflows for deployments
+
 ## [v2.2.1 - 2025-02-28](https://github.com/squeeble-ink/stackexchange.readme-stats/releases/tag/v2.2.1)
 
 ### Changed
