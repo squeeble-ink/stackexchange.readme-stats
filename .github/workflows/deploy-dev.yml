@@ -1,29 +1,29 @@
-name: Deploy Node.js CI - DO-001
+# name: Deploy Node.js CI - DO-001
 
-on:
-  push:
-    branches: [develop]
+# on:
+#   push:
+#     branches: [develop]
 
-jobs:
-  build:
-    runs-on: [ubuntu-22.04]
+# jobs:
+#   build:
+#     runs-on: [ubuntu-22.04]
 
-    steps:
-      - name: Deploy development
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.MAIN_IP }}
-          username: ${{ secrets.GHA_USER }}
-          key: ${{ secrets.GHA_SSH }}
-          passphrase: ${{ secrets.GHA_PW }}
-          script: |
-            eval `ssh-agent -s`
-            cd ./_server/${{ vars.REPO_NAME }}/dev/
-            rm -rf ./${{ vars.REPO_NAME }}
-            ssh-add ~/.ssh/${{ secrets.REPO_SSH_NAME }}
-            git clone git@github.com:squeeble-ink/${{ vars.REPO_NAME }}.git
-            cd ./${{ vars.REPO_NAME }}
-            git checkout develop
-            rm ./nginx/prd.conf
-            rm ./nginx/prd-location.conf
-            docker compose up dev -d --build
+#     steps:
+#       - name: Deploy development
+#         uses: appleboy/ssh-action@master
+#         with:
+#           host: ${{ secrets.MAIN_IP }}
+#           username: ${{ secrets.GHA_USER }}
+#           key: ${{ secrets.GHA_SSH }}
+#           passphrase: ${{ secrets.GHA_PW }}
+#           script: |
+#             eval `ssh-agent -s`
+#             cd ./_server/${{ vars.REPO_NAME }}/dev/
+#             rm -rf ./${{ vars.REPO_NAME }}
+#             ssh-add ~/.ssh/${{ secrets.REPO_SSH_NAME }}
+#             git clone git@github.com:squeeble-ink/${{ vars.REPO_NAME }}.git
+#             cd ./${{ vars.REPO_NAME }}
+#             git checkout develop
+#             rm ./nginx/prd.conf
+#             rm ./nginx/prd-location.conf
+#             docker compose up dev -d --build

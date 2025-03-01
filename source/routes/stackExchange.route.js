@@ -12,6 +12,8 @@ import {
 } from '../components/Icons/icons.js'
 import { SVG } from '../components/SVG/index.js'
 import { errorText } from '../components/ErrorText/index.js'
+import { siteName } from '../components/SiteName/index.js'
+import { siteLogo } from '../components/SiteLogo/index.js'
 
 dotenv.config()
 
@@ -88,21 +90,6 @@ router.get('/', async (req, res) => {
     )
   }
 
-  let siteName = seSite
-  switch (seSite.toLowerCase()) {
-    case 'stackoverflow':
-      siteName = 'Stack Overflow'
-      break
-    case 'meta':
-      siteName = 'Meta Exchange'
-      break
-    case 'askubuntu':
-      siteName = 'Ask Ubuntu'
-      break
-    default:
-      break
-  }
-
   const getData = async (url) => {
     let promise = new Promise((res, rej) => {
       fetch(url, {
@@ -136,7 +123,7 @@ router.get('/', async (req, res) => {
       SVG(
         true,
         true,
-        siteName,
+        siteName(seSite),
         `
         ${webError()}
         ${errorText(missingInfo)}
@@ -162,17 +149,20 @@ router.get('/', async (req, res) => {
     )
   }
 
+  const siteLogoContent = await siteLogo(seSite)
+
   res.send(
     SVG(
       useImage,
       false,
-      siteName,
+      siteLogoContent ?? siteName(seSite),
       `${
         useImage
           ? await userImage(user.profile_image)
           : userName(user.display_name, nameSize, nameX)
       }
-      ${await reputationContainer(useImage, user.reputation)}
+      ${siteLogoContent}
+      ${reputationContainer(useImage, user.reputation)}
       ${badgeContainer(useImage, user.badge_counts)}`,
     ),
   )

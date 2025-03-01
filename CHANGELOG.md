@@ -1,5 +1,27 @@
 # SE Readme Changelog
 
+## [v2.3.0 - 2025-03-01](https://github.com/squeeble-ink/stackexchange.readme-stats/releases/tag/v2.3.0)
+
+### Added
+
+- Implemented the stack exchange site logo instead of a title
+  Title will be used as fallback
+- Implemented nice name for all stack exchange sites
+
+### Fixed
+
+- Profile image rendering
+
+### Removed
+
+- Removed GitHub workflows for deployments
+
+## [v2.2.1 - 2025-02-28](https://github.com/squeeble-ink/stackexchange.readme-stats/releases/tag/v2.2.1)
+
+### Changed
+
+- No hard requirement for path '/se' to be in the URL on project level
+
 ## [v2.2.0 - 2024-04-14](https://github.com/squeeble-ink/stackexchange.readme-stats/releases/tag/v2.2.0)
 
 ### Added

@@ -1,2 +1,1 @@
-import { userImage } from './userImage.js'
-export { userImage }
+export { userImage } from './userImage.js'

@@ -1,4 +1,4 @@
-const getRep = async (rep, surfix = '') => {
+const getRep = (rep, surfix = '') => {
   if (rep > 9999) {
     switch (surfix) {
       case '':
@@ -13,7 +13,7 @@ const getRep = async (rep, surfix = '') => {
     }
 
     let obj = {}
-    obj = await getRep(Math.round(rep / 1000), surfix)
+    obj = getRep(Math.round(rep / 1000), surfix)
     dist = obj.dist
     rep = obj.rep
     surfix = obj.surfix
@@ -25,8 +25,8 @@ const getRep = async (rep, surfix = '') => {
   }
 }
 
-export const reputationContainer = async (useImage, reputation) => {
-  const reputationInfo = await getRep(reputation)
+export const reputationContainer = (useImage, reputation) => {
+  const reputationInfo = getRep(reputation)
 
   const reputationText = `${reputationInfo.rep}${reputationInfo.surfix}`
   return `
