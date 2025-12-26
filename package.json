@@ -4,12 +4,12 @@
   "description": "Stack Exchange Readme Stats",
   "main": "source/index.js",
   "type": "module",
-  "packageManager": "yarn@4.1.1",
+  "packageManager": "bun@1.3.5",
   "scripts": {
-    "dev": "nodemon ./source/index.js",
-    "start": "node ./source/index.js",
-    "prod": "cross-env NODE_ENV=production node ./source/index.js",
-    "map": "node ./scripts/createMaps.js"
+    "dev": "bun --watch ./source/index.js",
+    "start": "bun ./source/index.js",
+    "prod": "NODE_ENV=production bun ./source/index.js",
+    "map": "bun ./scripts/createMaps.js"
   },
   "repository": {
     "type": "git",
@@ -23,12 +23,10 @@
   "homepage": "https://github.com/squeeble-ink/stackexchange.readme-stats#readme",
   "dependencies": {
     "cors": "^2.8.5",
-    "cross-env": "^7.0.3",
     "dotenv": "^16.0.3",
-    "express": "^4.18.2",
-    "node-fetch": "^3.3.2"
+    "express": "^4.18.2"
   },
   "devDependencies": {
-    "nodemon": "^2.0.22"
+    "bun-types": "latest"
   }
 }

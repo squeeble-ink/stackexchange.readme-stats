@@ -2,8 +2,6 @@
 logs
 *.log
 npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
 lerna-debug.log*
 
 # Diagnostic reports (https://nodejs.org/api/report.html)
@@ -76,6 +74,15 @@ typings/
 
 # Yarn Integrity file
 .yarn-integrity
+
+# Yarn lock file (migrated to Bun)
+yarn.lock
+
+# Bun lock file (binary version - we use text version)
+bun.lockb
+
+# Bun cache directory
+.bun-cache
 
 # dotenv environment variables file
 .env

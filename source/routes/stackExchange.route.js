@@ -1,5 +1,4 @@
 import express from 'express'
-import fetch from 'node-fetch'
 import * as dotenv from 'dotenv'
 import { userImage } from '../components/UserImage/index.js'
 import { userName } from '../components/UserName/index.js'
